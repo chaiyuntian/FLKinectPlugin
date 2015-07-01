@@ -1,9 +1,7 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 
 #include "FLKinectPluginPrivatePCH.h"
-#include "AllowWindowsPlatformTypes.h"
-#include "Kinect.h"
-#include "HideWindowsPlatformTypes.h"
+
 #include "KinectPluginCore.h"
 
 
@@ -24,9 +22,18 @@ void FFLKinectPlugin::StartupModule()
 	
 	
 	UE_LOG(LogTemp, Warning, TEXT("Hi Mike, I'm your plugin. Treat me well"))
-		FKinectPluginCore kinect;
 
 		//TREAT THIS AREA LIKE YOUR "MAIN" FUNCTION
+	FKinectPluginCore kinect;
+	kinect.Setup();
+
+	bool toggleApp = true;
+
+	while (toggleApp) {
+
+		kinect.Update();
+
+	}
 
 
 }

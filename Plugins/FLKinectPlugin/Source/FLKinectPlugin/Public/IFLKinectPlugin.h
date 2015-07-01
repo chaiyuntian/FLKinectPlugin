@@ -36,3 +36,12 @@ public:
 	}
 };
 
+// This really belongs in a util library
+template <class T> void SafeRelease(T **ppT)
+{
+	if (*ppT)
+	{
+		(*ppT)->Release();
+		*ppT = nullptr;
+	}
+}

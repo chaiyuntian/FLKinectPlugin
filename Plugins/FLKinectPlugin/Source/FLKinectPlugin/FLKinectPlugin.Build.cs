@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using UnrealBuildTool;
 
 namespace UnrealBuildTool.Rules
 {
@@ -22,9 +23,10 @@ namespace UnrealBuildTool.Rules
 
             string ThirdPartyKinectIncludePath = Path.Combine(ExpandedKinectEnvVar, "inc");
 
-            //NOTE (OS): may need to do x64 for Editor Builds.
-            string ThirdPartyKinectLibPath = Path.Combine(ExpandedKinectEnvVar, "lib", "x86");
+            string PlatformSpec = (Target.Platform == UnrealTargetPlatform.Win64) ? "x64" : "x86";
+            string ThirdPartyKinectLibPath = Path.Combine(ExpandedKinectEnvVar, "Lib", PlatformSpec);
 
+            PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyKinectLibPath, "Kinect20.lib"));
 
             PublicIncludePaths.AddRange(
 				new string[] {
@@ -39,6 +41,9 @@ namespace UnrealBuildTool.Rules
 					// ... add other private include paths required here ...
 				}
 				);
+
+            
+            
 
 			PublicDependencyModuleNames.AddRange(
 				new string[]

@@ -15,7 +15,8 @@
 	[
 		{
 			"Name" : "FLKinectPlugin",
-			"Type" : "Developer"
+			"Type" : "Developer",
+			"WhitelistPlatforms" : [ "Win64", "Win32" ]
 		}
 	]
 }

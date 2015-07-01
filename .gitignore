@@ -1,0 +1,10 @@
+###Fake Love###
+
+*.sln
+Build/
+Binaries/
+Intermediate/
+Config/
+Content/
+Saved/
+/Source/

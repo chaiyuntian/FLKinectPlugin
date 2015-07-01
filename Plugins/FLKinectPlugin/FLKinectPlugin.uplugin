@@ -1,0 +1,21 @@
+{
+	"FileVersion" : 3,
+	
+	"FriendlyName" : "FakeLove Kinect Plugin",
+	"Version" : 1,
+	"VersionName" : "0.0.1",
+	"CreatedBy" : "Fake Love",
+	"CreatedByURL" : "http://fakelove.tv",
+	"EngineVersion" : "4.8.0",
+	"Description" : "FUCK YOU",
+	"Category" : "Examples",
+	"EnabledByDefault" : true,
+	
+	"Modules" :
+	[
+		{
+			"Name" : "FLKinectPlugin",
+			"Type" : "Developer"
+		}
+	]
+}

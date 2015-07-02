@@ -27,13 +27,11 @@ void FFLKinectPlugin::StartupModule()
 	FKinectPluginCore kinect;
 	kinect.Setup();
 
-	bool toggleApp = true;
 
-	while (toggleApp) {
+	 
+	//kinect.Update();
 
-		kinect.Update();
-
-	}
+	
 
 
 }

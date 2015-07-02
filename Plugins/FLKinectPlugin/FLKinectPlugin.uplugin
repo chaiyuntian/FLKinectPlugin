@@ -9,7 +9,7 @@
 	"EngineVersion" : "4.8.0",
 	"Description" : "FUCK YOU",
 	"Category" : "Examples",
-	"EnabledByDefault" : true,
+	"EnabledByDefault" : false,
 	
 	"Modules" :
 	[

@@ -16,9 +16,7 @@ class FLKINECTPLUGIN_API UKinectComponent : public UActorComponent
 	GENERATED_UCLASS_BODY()
 
 public:	
-	// Sets default values for this component's properties
-	UKinectComponent();
-
+	
 	// Called when the game starts
 	virtual void BeginPlay() override;
 	

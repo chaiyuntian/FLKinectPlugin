@@ -5,19 +5,12 @@
 #include "KinectComponent.h"
 
 
-//	UE_LOG(LogTemp, Warning, TEXT("My Function Works!!! Woo!"));
-
-
-// Sets default values for this component's properties
-UKinectComponent::UKinectComponent()
+UKinectComponent::UKinectComponent(class FObjectInitializer const &)
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
 
 	kinectInstance = FKinectPluginCore::GetInstance();
-	// ...
 }
 
 // Called when the game starts
@@ -59,15 +52,15 @@ FVector UKinectComponent::GetLeftHandPos(){
 
 FVector UKinectComponent::GetRightHandPos(){
 
-	return FVector(9.0f, 35.0f, 20.0f);
+	return kinectInstance->LeftHandLastPosition;
 }
 
 bool UKinectComponent::GetIsLeftHandClosed(){
 
-	return true;
+	return kinectInstance->LeftHandLastIsClosed;
 }
 
 bool UKinectComponent::GetIsRightHandClosed(){
 
-	return false;
+	return kinectInstance->RightHandLastIsClosed;
 }

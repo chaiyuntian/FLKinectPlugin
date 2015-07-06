@@ -28,7 +28,7 @@ FKinectPluginCore::FKinectPluginCore():
 		//}
 }
 
-// NOTE (OS): FUCK C++
+
 FKinectPluginCore* FKinectPluginCore::Instance;
 
 FKinectPluginCore* FKinectPluginCore::GetInstance()
@@ -73,6 +73,7 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 
 	uint32 FKinectPluginCore::Run()
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Kinect Running: %d"), bRunning)
 		while (bRunning)
 		{
 			Update();
@@ -84,6 +85,7 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 	void FKinectPluginCore::Stop()
 	{
 		//TODO (OS - @MR): Implement this;
+		UE_LOG(LogTemp, Warning, TEXT("Kinect Stopped"))
 		bRunning = false;
 	}
 

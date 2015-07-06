@@ -1,6 +1,12 @@
 #pragma once
 
-#include "FLKinectPluginPrivatePCH.h"
+//#include "FLKinectPluginPrivatePCH.h"
+#include "CoreUObject.h"
+/*
+#include "AllowWindowsPlatformTypes.h"
+#include "Kinect.h"
+#include "HideWindowsPlatformTypes.h"
+*/
 
 class FKinectPluginCore : public FRunnable
 {

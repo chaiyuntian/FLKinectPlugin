@@ -15,7 +15,6 @@ class FFLKinectPlugin : public IFLKinectPlugin
 IMPLEMENT_MODULE( FFLKinectPlugin, FLKinectPlugin )
 
 
-
 void FFLKinectPlugin::StartupModule()
 {
 	// This code will execute after your module is loaded into memory (but after global variables are initialized, of course.)
@@ -23,7 +22,7 @@ void FFLKinectPlugin::StartupModule()
 	
 	UE_LOG(LogTemp, Warning, TEXT("Hi Mike, I'm your plugin. Treat me well"))
 
-	
+	//NOTE (MR) : Uncommented after (OS) changes 7.6.15
 	//FKinectPluginCore* kinect = FKinectPluginCore::GetInstance();
 	
 }

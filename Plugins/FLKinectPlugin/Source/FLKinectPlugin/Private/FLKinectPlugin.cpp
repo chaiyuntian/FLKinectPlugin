@@ -1,8 +1,8 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 
 #include "FLKinectPluginPrivatePCH.h"
-
 #include "KinectPluginCore.h"
+//#include "KinectComponent.generated.inl" // NOTE (MR) Added after being put into the plug in folder
 
 
 class FFLKinectPlugin : public IFLKinectPlugin
@@ -23,17 +23,9 @@ void FFLKinectPlugin::StartupModule()
 	
 	UE_LOG(LogTemp, Warning, TEXT("Hi Mike, I'm your plugin. Treat me well"))
 
-		//TREAT THIS AREA LIKE YOUR "MAIN" FUNCTION
-	FKinectPluginCore kinect;
-	kinect.Setup();
-
-
-	 
-	//kinect.Update();
-
 	
-
-
+	//FKinectPluginCore* kinect = FKinectPluginCore::GetInstance();
+	
 }
 
 

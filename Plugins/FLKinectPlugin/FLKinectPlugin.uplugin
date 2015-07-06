@@ -7,15 +7,15 @@
 	"CreatedBy" : "Fake Love",
 	"CreatedByURL" : "http://fakelove.tv",
 	"EngineVersion" : "4.8.0",
-	"Description" : "FUCK YOU",
+	"Description" : "Kinect Integration",
 	"Category" : "Examples",
-	"EnabledByDefault" : false,
+	"EnabledByDefault" : true,
 	
 	"Modules" :
 	[
 		{
 			"Name" : "FLKinectPlugin",
-			"Type" : "Developer",
+			"Type" : "Runtime",
 			"WhitelistPlatforms" : [ "Win64", "Win32" ]
 		}
 	]

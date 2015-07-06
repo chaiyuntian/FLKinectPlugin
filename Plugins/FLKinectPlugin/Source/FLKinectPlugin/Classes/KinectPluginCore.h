@@ -1,20 +1,37 @@
-
 #pragma once
 
 #include "FLKinectPluginPrivatePCH.h"
 
-class FKinectPluginCore
+class FKinectPluginCore : public FRunnable
 {
 public:
 	FKinectPluginCore();
 	~FKinectPluginCore();
 
+	/* Begin FRunnable interface. */
+	virtual bool Init();
+	virtual uint32 Run();
+	virtual void Stop();
+	/* End FRunnable interface */
+
+	/* Singleton Interface*/
+	static FKinectPluginCore* GetInstance();
+	FRunnableThread* Thread;
+
+	/* Public state variables */
+	FVector	RightHandLastPosition;
+	FVector	LeftHandLastPosition;
+	bool		RightHandLastIsClosed;
+	bool		LeftHandLastIsClosed;
+	
+
+
 	void					Setup();
 	void                    Update();
-	bool					getIsLeftHandClosed();
-	bool					getIsRightHandClosed();
-	Joint					getLeftHandPos();
-	Joint					getRightHandPos();
+	bool					GetIsLeftHandClosed();
+	bool					GetIsRightHandClosed();
+	Joint					GetLeftHandPos();
+	Joint					GetRightHandPos();
 
 private:
 	int64                   m_nStartTime;
@@ -37,17 +54,21 @@ private:
 	void					GetBody(INT64 nTime, int nBodyCount, IBody** ppBodies);
 
 	//Set a toggle bool for Hand Open / Close
-	void					setIsLeftHandClosed(int gestureIndex);
-	void					setIsRightHandClosed(int gestureIndex);
+	void					SetIsLeftHandClosed(int gestureIndex);
+	void					SetIsRightHandClosed(int gestureIndex);
 	bool					rightHandToggle, leftHandToggle;
 
 	//Set Hand Position Variable
-	void					setLeftHandPos(Joint leftHandPos);
-	void					setRightHandPos(Joint rightHandPos);
+	void					SetLeftHandPos(Joint leftHandPos);
+	void					SetRightHandPos(Joint rightHandPos);
 	Joint					leftHandPosContainer, rightHandPosContainer;
 
 
+private:
 
+	/* Frunnable Helper. */
+	bool bRunning;
+	static FKinectPluginCore* Instance;
 };
 
 

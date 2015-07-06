@@ -10,6 +10,8 @@ public class PluginDevTest : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
+        PublicIncludePaths.AddRange(new string[] { "FLKinectPlugin/Public", "FLKinectPlugin/Classes" });
+
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		

@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "PluginDevTest.h"
+#include "FLKinectPluginPrivatePCH.h" //NOTE (MR) Added this after putting it into plugin folder! DOESN"T WORK
+
 #include "KinectComponent.h"
+
 
 //	UE_LOG(LogTemp, Warning, TEXT("My Function Works!!! Woo!"));
 
@@ -14,10 +16,9 @@ UKinectComponent::UKinectComponent()
 	bWantsBeginPlay = true;
 	PrimaryComponentTick.bCanEverTick = true;
 
-
+	kinectInstance = FKinectPluginCore::GetInstance();
 	// ...
 }
-
 
 // Called when the game starts
 void UKinectComponent::BeginPlay()
@@ -53,7 +54,7 @@ void UKinectComponent::KinectDebug(){
 
 FVector UKinectComponent::GetLeftHandPos(){
 
-	return FVector(2.0f, 3.0f, 5.0f);
+	return kinectInstance->RightHandLastPosition;
 }
 
 FVector UKinectComponent::GetRightHandPos(){

@@ -2,13 +2,18 @@
 
 #pragma once
 
-#include "Components/ActorComponent.h"
+//#include "Components/ActorComponent.h"
+
+#include "KinectPluginCore.h"
+
 #include "KinectComponent.generated.h"
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class PLUGINDEVTEST_API UKinectComponent : public UActorComponent
+
+
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) ) 
+class FLKINECTPLUGIN_API UKinectComponent : public UActorComponent
 {
-	GENERATED_BODY() 
+	GENERATED_UCLASS_BODY()
 
 public:	
 	// Sets default values for this component's properties
@@ -42,6 +47,8 @@ public:
 	//Get a bool that represents if the Right Hand is Closed
 	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
 		bool GetIsRightHandClosed();
-	
+
+private:
+	FKinectPluginCore* kinectInstance;
 
 };

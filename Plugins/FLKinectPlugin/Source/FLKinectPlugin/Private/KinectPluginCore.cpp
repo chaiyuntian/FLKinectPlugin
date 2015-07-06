@@ -3,14 +3,6 @@
 #include "KinectPluginCore.h"
 
 
-//#include "stdafx.h"
-//#include <strsafe.h>
-//#include "resource.h"
-//#include <Windows.h>
-
-//#include <iostream>
-//using namespace std;
-
 FKinectPluginCore::FKinectPluginCore():
 
 		m_nStartTime(0),
@@ -26,7 +18,7 @@ FKinectPluginCore::FKinectPluginCore():
 		leftHandToggle(false)
 
 {
-		UE_LOG(LogTemp, Warning, TEXT("Kinect Plugin Core Activated"))
+	UE_LOG(LogTemp, Warning, TEXT("Kinect Plugin Core Activated"))
 		// NOTE (MR): Couldn't figure what this bit is for
 
 		//LARGE_INTEGER qpf = { 0 };
@@ -34,9 +26,22 @@ FKinectPluginCore::FKinectPluginCore():
 		//{
 		//	m_fFreq = double(qpf.QuadPart);
 		//}
-
 }
 
+// NOTE (OS): FUCK C++
+FKinectPluginCore* FKinectPluginCore::Instance;
+
+FKinectPluginCore* FKinectPluginCore::GetInstance()
+{	
+	if (Instance == nullptr)
+	{
+		//Save Singleton
+		Instance = new FKinectPluginCore();
+		//Run Thread	
+		Instance->Thread = FRunnableThread::Create(Instance, TEXT("KinectThread"), 0, EThreadPriority::TPri_Normal);
+	}
+	return Instance;
+}
 
 	FKinectPluginCore::~FKinectPluginCore()
 	{
@@ -53,8 +58,33 @@ FKinectPluginCore::FKinectPluginCore():
 		{
 			m_pKinectSensor->Close();
 		}
-
+	
 		SafeRelease(&m_pKinectSensor);
+	}
+
+
+	bool FKinectPluginCore::Init()
+	{
+		Setup();
+		bRunning = true;
+		//HACK (OS): should return status
+		return bRunning;
+	}
+
+	uint32 FKinectPluginCore::Run()
+	{
+		while (bRunning)
+		{
+			Update();
+		}
+		//TODO (OS): Should return status;
+		return 0;
+	}
+
+	void FKinectPluginCore::Stop()
+	{
+		//TODO (OS - @MR): Implement this;
+		bRunning = false;
 	}
 
 
@@ -90,6 +120,14 @@ FKinectPluginCore::FKinectPluginCore():
 			if (SUCCEEDED(hr))
 			{
 				GetBody(nTime, BODY_COUNT, ppBodies);
+
+				// NOTE (MR) : Updating last Hand Positins and Gestures
+				Joint rj = GetRightHandPos();
+				Joint lj = GetLeftHandPos();
+				RightHandLastPosition	= FVector(rj.Position.X, rj.Position.Z, rj.Position.Y);
+				LeftHandLastPosition	= FVector(lj.Position.X, lj.Position.Z, lj.Position.Y);
+				RightHandLastIsClosed	= GetIsRightHandClosed();
+				LeftHandLastIsClosed	= GetIsLeftHandClosed();
 			}
 
 			for (int i = 0; i < _countof(ppBodies); ++i)
@@ -174,12 +212,12 @@ FKinectPluginCore::FKinectPluginCore():
 				}
 
 				//Set Left / Right Hand Pos
-				setLeftHandPos(joints[JointType_HandLeft]);
-				setRightHandPos(joints[JointType_HandRight]);
+				SetLeftHandPos(joints[JointType_HandLeft]);
+				SetRightHandPos(joints[JointType_HandRight]);
 
 				//Set whether Left / Right Hand is closed
-				setIsLeftHandClosed(leftHandState);
-				setIsRightHandClosed(rightHandState);
+				SetIsLeftHandClosed(leftHandState);
+				SetIsRightHandClosed(rightHandState);
 
 				//Will need to make this so I can write it in the public update
 				//cout << "Left Hand Pos X: " << getLeftHandPos().Position.X << endl;
@@ -194,7 +232,7 @@ FKinectPluginCore::FKinectPluginCore():
 		}
 	}
 
-	void FKinectPluginCore::setIsLeftHandClosed(int gestureIndex) {
+	void FKinectPluginCore::SetIsLeftHandClosed(int gestureIndex) {
 
 		//MR Report if hand is open or closed
 		//open
@@ -210,7 +248,7 @@ FKinectPluginCore::FKinectPluginCore():
 
 	}
 
-	void FKinectPluginCore::setIsRightHandClosed(int gestureIndex) {
+	void FKinectPluginCore::SetIsRightHandClosed(int gestureIndex) {
 
 		//open
 		if (gestureIndex == 2) {
@@ -226,36 +264,39 @@ FKinectPluginCore::FKinectPluginCore():
 
 	}
 
-	bool FKinectPluginCore::getIsLeftHandClosed() {
+	bool FKinectPluginCore::GetIsLeftHandClosed() {
 
 		return leftHandToggle;
 
 	}
 
-	bool FKinectPluginCore::getIsRightHandClosed() {
+	bool FKinectPluginCore::GetIsRightHandClosed() {
 
 		return rightHandToggle;
 
 	}
 
-	void FKinectPluginCore::setLeftHandPos(Joint leftHandPos) {
+	void FKinectPluginCore::SetLeftHandPos(Joint leftHandPos) {
 
 		leftHandPosContainer = leftHandPos;
 	}
 
-	void FKinectPluginCore::setRightHandPos(Joint rightHandPos) {
+	void FKinectPluginCore::SetRightHandPos(Joint rightHandPos) {
 
 		rightHandPosContainer = rightHandPos;
 
 	}
 
-	Joint FKinectPluginCore::getLeftHandPos() {
+	Joint FKinectPluginCore::GetLeftHandPos() {
 
 		return leftHandPosContainer;
 	}
 
-	Joint FKinectPluginCore::getRightHandPos() {
+	Joint FKinectPluginCore::GetRightHandPos() {
 
 		return rightHandPosContainer;
 
 	}
+
+
+	

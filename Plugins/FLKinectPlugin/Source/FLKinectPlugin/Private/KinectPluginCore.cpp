@@ -123,11 +123,18 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 			{
 				GetBody(nTime, BODY_COUNT, ppBodies);
 
-				// NOTE (MR) : Updating last Hand Positins and Gestures
-				Joint rj = GetRightHandPos();
-				Joint lj = GetLeftHandPos();
-				RightHandLastPosition	= FVector(rj.Position.X, rj.Position.Z, rj.Position.Y);
-				LeftHandLastPosition	= FVector(lj.Position.X, lj.Position.Z, lj.Position.Y);
+				// NOTE (MR) : Updating last Hand Positions and Gestures
+				Joint rh = GetRightHandPos();
+				Joint lh = GetLeftHandPos();
+				RightHandLastPosition = FVector(rh.Position.X, rh.Position.Z, rh.Position.Y);
+				LeftHandLastPosition	= FVector(lh.Position.X, lh.Position.Z, lh.Position.Y);
+
+				Joint rw = GetRightWristPos();
+				Joint lw = GetLeftWristPos();
+
+				RightWristLastPosition = FVector(rw.Position.X, rw.Position.Z, rw.Position.Y);
+				LeftWristLastPosition = FVector(lw.Position.X, lw.Position.Z, lw.Position.Y);
+
 				RightHandLastIsClosed	= GetIsRightHandClosed();
 				LeftHandLastIsClosed	= GetIsLeftHandClosed();
 			}
@@ -213,9 +220,15 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 					//std::cout << "Joint Y: " << jointPoints[j].y << endl;
 				}
 
+		
 				//Set Left / Right Hand Pos
 				SetLeftHandPos(joints[JointType_HandLeft]);
 				SetRightHandPos(joints[JointType_HandRight]);
+
+				//Set Left / Right Wrist Pos
+
+				SetLeftWristPos(joints[JointType_WristLeft]);
+				SetRightWristPos(joints[JointType_WristRight]);
 
 				//Set whether Left / Right Hand is closed
 				SetIsLeftHandClosed(leftHandState);
@@ -300,5 +313,24 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 
 	}
 
+	void FKinectPluginCore::SetLeftWristPos(Joint leftWristPos) {
 
+		leftWristPosContainer = leftWristPos;
+	}
+
+	void FKinectPluginCore::SetRightWristPos(Joint rightWristPos) {
+
+		rightWristPosContainer = rightWristPos;
+	}
+
+
+	Joint FKinectPluginCore::GetLeftWristPos() {
+
+		return leftWristPosContainer;
+	}
+
+	Joint FKinectPluginCore::GetRightWristPos() {
+
+		return rightWristPosContainer;
+	}
 	

@@ -55,6 +55,16 @@ FVector UKinectComponent::GetRightHandPos(){
 	return kinectInstance->LeftHandLastPosition;
 }
 
+FVector UKinectComponent::GetLeftWristPos(){
+
+	return kinectInstance->LeftWristLastPosition;
+}
+
+FVector UKinectComponent::GetRightWristPos(){
+
+	return kinectInstance->RightWristLastPosition;
+}
+
 bool UKinectComponent::GetIsLeftHandClosed(){
 
 	return kinectInstance->LeftHandLastIsClosed;

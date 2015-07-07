@@ -27,6 +27,11 @@ public:
 	/* Public state variables */
 	FVector	RightHandLastPosition;
 	FVector	LeftHandLastPosition;
+	
+	FVector RightWristLastPosition;
+	FVector LeftWristLastPosition;
+
+
 	bool		RightHandLastIsClosed;
 	bool		LeftHandLastIsClosed;
 	
@@ -36,8 +41,12 @@ public:
 	void                    Update();
 	bool					GetIsLeftHandClosed();
 	bool					GetIsRightHandClosed();
+	
 	Joint					GetLeftHandPos();
 	Joint					GetRightHandPos();
+
+	Joint					GetLeftWristPos();
+	Joint					GetRightWristPos();
 
 private:
 	int64                   m_nStartTime;
@@ -64,11 +73,18 @@ private:
 	void					SetIsRightHandClosed(int gestureIndex);
 	bool					rightHandToggle, leftHandToggle;
 
-	//Set Hand Position Variable
+	//Set Hand Position 
 	void					SetLeftHandPos(Joint leftHandPos);
 	void					SetRightHandPos(Joint rightHandPos);
-	Joint					leftHandPosContainer, rightHandPosContainer;
+	Joint leftHandPosContainer, rightHandPosContainer;
+	
+	//Set Wrist Position
+	void					SetLeftWristPos(Joint leftWristPos);
+	void					SetRightWristPos(Joint rightWristPos);
+	Joint leftWristPosContainer, rightWristPosContainer;
 
+	//Set Head
+	void					SetHeadPos(Joint head);
 
 private:
 
@@ -78,4 +94,26 @@ private:
 };
 
 
+//NOTE (MR) : Still need to get these Joints
+
+/*JointType_AnkleLeft
+JointType_AnkleRight
+JointType_ElbowLeft
+JointType_ElbowRight
+JointType_FootLeft
+JointType_FootRight
+JointType_Head
+JointType_HipLeft
+JointType_HipRight
+JointType_KneeLeft
+JointType_KneeRight
+JointType_KneeRight
+JointType_Neck
+JointType_ShoulderLeft
+JointType_ShoulderRight
+JointType_SpineBase
+JointType_SpineMid
+JointType_SpineShoulder
+JointType_ThumbLeft
+JointType_ThumbRight*/
 

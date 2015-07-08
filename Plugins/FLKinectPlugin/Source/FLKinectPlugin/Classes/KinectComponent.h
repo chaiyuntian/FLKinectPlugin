@@ -5,9 +5,7 @@
 //#include "Components/ActorComponent.h"
 
 #include "KinectPluginCore.h"
-
 #include "KinectComponent.generated.h"
-
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) ) 
@@ -22,28 +20,28 @@ public:
 	
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
-	
+
 
 	void Debug(FString Msg);
 
-	//Method that does a draw debug to screen from c++
-	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
+	//Method that says if our plugin is working
+	UFUNCTION(BlueprintCallable, Category = "FL Kinect Debug")
 		void KinectDebug();
-	
+
 	//Get Left Hand Position
 	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
-		FVector GetLeftHandPos();
+		FVector GetLeftHandPosition();
 	
 	//Get Right Hand Position
 	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
-		FVector GetRightHandPos();
+		FVector GetRightHandPosition();
 	
 	//Get Left Wrist Position
 	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
-		FVector GetLeftWristPos();
+		FVector GetLeftWristPosition();
 	//Get Right Wrist Position
 	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
-		FVector GetRightWristPos();
+		FVector GetRightWristPosition();
 
 	//Get a bool that represents if the Left Hand is Closed
 	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
@@ -52,7 +50,8 @@ public:
 	//Get a bool that represents if the Right Hand is Closed
 	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
 		bool GetIsRightHandClosed();
-
+	
+	
 
 private:
 	FKinectPluginCore* kinectInstance;

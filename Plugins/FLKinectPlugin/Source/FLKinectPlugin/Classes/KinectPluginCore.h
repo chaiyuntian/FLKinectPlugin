@@ -25,17 +25,6 @@ public:
 	FRunnableThread* Thread;
 
 	/* Public state variables */
-	FVector	RightHandLastPosition;
-	FVector	LeftHandLastPosition;
-	
-	FVector RightWristLastPosition;
-	FVector LeftWristLastPosition;
-
-
-	bool		RightHandLastIsClosed;
-	bool		LeftHandLastIsClosed;
-	
-
 
 	void					Setup();
 	void                    Update();
@@ -47,6 +36,33 @@ public:
 
 	Joint					GetLeftWristPos();
 	Joint					GetRightWristPos();
+
+	//bool					IsKinectTracking;
+
+	/* Last Position Variables */
+	FVector	RightHandLastPosition;
+	FVector	LeftHandLastPosition;
+
+	FVector RightWristLastPosition;
+	FVector LeftWristLastPosition;
+
+
+	bool		RightHandLastIsClosed;
+	bool		LeftHandLastIsClosed;
+
+	//Note (MR) : moved these to public
+
+	//Set a toggle bool for Hand Open / Close
+	void					SetIsLeftHandClosed(int gestureIndex);
+	void					SetIsRightHandClosed(int gestureIndex);
+
+	//Set Hand Position 
+	void					SetLeftHandPos(Joint leftHandPos);
+	void					SetRightHandPos(Joint rightHandPos);
+
+	//Set Wrist Position
+	void					SetLeftWristPos(Joint leftWristPos);
+	void					SetRightWristPos(Joint rightWristPos);
 
 private:
 	int64                   m_nStartTime;
@@ -68,23 +84,12 @@ private:
 	//Process the body
 	void					GetBody(INT64 nTime, int nBodyCount, IBody** ppBodies);
 
-	//Set a toggle bool for Hand Open / Close
-	void					SetIsLeftHandClosed(int gestureIndex);
-	void					SetIsRightHandClosed(int gestureIndex);
+	//Used for setters and getters
 	bool					rightHandToggle, leftHandToggle;
-
-	//Set Hand Position 
-	void					SetLeftHandPos(Joint leftHandPos);
-	void					SetRightHandPos(Joint rightHandPos);
 	Joint leftHandPosContainer, rightHandPosContainer;
-	
-	//Set Wrist Position
-	void					SetLeftWristPos(Joint leftWristPos);
-	void					SetRightWristPos(Joint rightWristPos);
 	Joint leftWristPosContainer, rightWristPosContainer;
 
-	//Set Head
-	void					SetHeadPos(Joint head);
+	
 
 private:
 

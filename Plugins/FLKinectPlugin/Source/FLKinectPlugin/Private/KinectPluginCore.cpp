@@ -123,20 +123,7 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 			{
 				GetBody(nTime, BODY_COUNT, ppBodies);
 
-				// NOTE (MR) : Updating last Hand Positions and Gestures
-				Joint rh = GetRightHandPos();
-				Joint lh = GetLeftHandPos();
-				RightHandLastPosition = FVector(rh.Position.X, rh.Position.Z, rh.Position.Y);
-				LeftHandLastPosition	= FVector(lh.Position.X, lh.Position.Z, lh.Position.Y);
-
-				Joint rw = GetRightWristPos();
-				Joint lw = GetLeftWristPos();
-
-				RightWristLastPosition = FVector(rw.Position.X, rw.Position.Z, rw.Position.Y);
-				LeftWristLastPosition = FVector(lw.Position.X, lw.Position.Z, lw.Position.Y);
-
-				RightHandLastIsClosed	= GetIsRightHandClosed();
-				LeftHandLastIsClosed	= GetIsLeftHandClosed();
+				//Change (MR) : Getters used to be here but it didn't work correctly
 			}
 
 			for (int i = 0; i < _countof(ppBodies); ++i)
@@ -188,7 +175,7 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 		if (!m_pKinectSensor || FAILED(hr))
 		{
 			//SetStatusMessage(L"No ready Kinect found!", 10000, true);
-			UE_LOG(LogTemp, Warning, TEXT("No Kinect Fonud!"))
+			UE_LOG(LogTemp, Warning, TEXT("No Kinect Found!"))
 			return E_FAIL;
 		}
 
@@ -201,6 +188,11 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 			IBody* pBody = ppBodies[i];
 			if (pBody)
 			{
+				//NOTE (MR) : Trying to debug incoming joints stream
+				//BOOLEAN bTracked = false;
+				//IsKinectTracking = pBody->get_IsTracked(&bTracked);
+				
+
 				Joint joints[JointType_Count];
 				//D2D1_POINT_2F jointPoints[JointType_Count];
 				HandState leftHandState = HandState_Unknown;
@@ -218,13 +210,15 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 					//MR Note: In case we need to utilize this later
 					//std::cout << "Joint X: " << jointPoints[j].x << endl;
 					//std::cout << "Joint Y: " << jointPoints[j].y << endl;
+
+					//UE_LOG(LogTemp, Warning, TEXT("AND IT'S TRACKING JOINTS!"))
+
 				}
 
-		
 				//Set Left / Right Hand Pos
 				SetLeftHandPos(joints[JointType_HandLeft]);
 				SetRightHandPos(joints[JointType_HandRight]);
-
+		
 				//Set Left / Right Wrist Pos
 
 				SetLeftWristPos(joints[JointType_WristLeft]);
@@ -234,14 +228,23 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 				SetIsLeftHandClosed(leftHandState);
 				SetIsRightHandClosed(rightHandState);
 
-				//Will need to make this so I can write it in the public update
-				//cout << "Left Hand Pos X: " << getLeftHandPos().Position.X << endl;
-				//cout << "Left Hand Pos Y: " << getLeftHandPos().Position.Y << endl;
-				//cout << "Left Hand Pos Z: " << getLeftHandPos().Position.Z << endl;
+				// NOTE (MR) : Updating GET last Hand Positions and Gestures here
+				Joint rh = GetRightHandPos();
+				Joint lh = GetLeftHandPos();
 
+				RightHandLastPosition = FVector(rh.Position.X, rh.Position.Z, rh.Position.Y);
+				LeftHandLastPosition = FVector(lh.Position.X, lh.Position.Z, lh.Position.Y);
+				
+				Joint rw = GetRightWristPos();
+				Joint lw = GetLeftWristPos();
 
-				//cout << "Left Hand: " << kinect.getIsLeftHandClosed() << endl;
-				//cout << "Right Hand: " << kinect.getIsRightHandClosed() << endl;
+				RightWristLastPosition = FVector(rw.Position.X, rw.Position.Z, rw.Position.Y);
+				LeftWristLastPosition = FVector(lw.Position.X, lw.Position.Z, lw.Position.Y);
+
+				RightHandLastIsClosed = GetIsRightHandClosed();
+				LeftHandLastIsClosed = GetIsLeftHandClosed();
+
+				//UE_LOG(LogTemp, Warning, TEXT("%f Checking RightHandLastPosition"), RightHandLastPosition.X);
 			}
 
 		}
@@ -292,7 +295,7 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 	}
 
 	void FKinectPluginCore::SetLeftHandPos(Joint leftHandPos) {
-
+		
 		leftHandPosContainer = leftHandPos;
 	}
 
@@ -303,7 +306,7 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 	}
 
 	Joint FKinectPluginCore::GetLeftHandPos() {
-
+		
 		return leftHandPosContainer;
 	}
 

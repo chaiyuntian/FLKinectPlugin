@@ -18,7 +18,6 @@ void UKinectComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-
 }
 
 
@@ -45,22 +44,23 @@ void UKinectComponent::KinectDebug(){
 
 }
 
-FVector UKinectComponent::GetLeftHandPos(){
-
-	return kinectInstance->RightHandLastPosition;
-}
-
-FVector UKinectComponent::GetRightHandPos(){
+FVector UKinectComponent::GetLeftHandPosition(){
 
 	return kinectInstance->LeftHandLastPosition;
 }
 
-FVector UKinectComponent::GetLeftWristPos(){
+FVector UKinectComponent::GetRightHandPosition(){
+
+	return kinectInstance->RightHandLastPosition;
+	
+}
+
+FVector UKinectComponent::GetLeftWristPosition(){
 
 	return kinectInstance->LeftWristLastPosition;
 }
 
-FVector UKinectComponent::GetRightWristPos(){
+FVector UKinectComponent::GetRightWristPosition(){
 
 	return kinectInstance->RightWristLastPosition;
 }
@@ -74,3 +74,4 @@ bool UKinectComponent::GetIsRightHandClosed(){
 
 	return kinectInstance->RightHandLastIsClosed;
 }
+

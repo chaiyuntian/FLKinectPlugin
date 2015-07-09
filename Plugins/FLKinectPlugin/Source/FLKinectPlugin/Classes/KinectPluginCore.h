@@ -31,11 +31,11 @@ public:
 	bool					GetIsLeftHandClosed();
 	bool					GetIsRightHandClosed();
 	
-	Joint					GetLeftHandPos();
-	Joint					GetRightHandPos();
+	//Joint					GetLeftHandPos();
+	//Joint					GetRightHandPos();
 
-	Joint					GetLeftWristPos();
-	Joint					GetRightWristPos();
+	//Joint					GetLeftWristPos();
+	//Joint					GetRightWristPos();
 
 	//bool					IsKinectTracking;
 
@@ -43,8 +43,8 @@ public:
 	FVector	RightHandLastPosition;
 	FVector	LeftHandLastPosition;
 
-	FVector RightWristLastPosition;
-	FVector LeftWristLastPosition;
+	//FVector RightWristLastPosition;
+	//FVector LeftWristLastPosition;
 
 
 	bool		RightHandLastIsClosed;
@@ -61,8 +61,8 @@ public:
 	void					SetRightHandPos(Joint rightHandPos);
 
 	//Set Wrist Position
-	void					SetLeftWristPos(Joint leftWristPos);
-	void					SetRightWristPos(Joint rightWristPos);
+	//void					SetLeftWristPos(Joint leftWristPos);
+	//void					SetRightWristPos(Joint rightWristPos);
 
 private:
 	int64                   m_nStartTime;
@@ -86,9 +86,10 @@ private:
 
 	//Used for setters and getters
 	bool					rightHandToggle, leftHandToggle;
-	Joint leftHandPosContainer, rightHandPosContainer;
-	Joint leftWristPosContainer, rightWristPosContainer;
-
+	//Joint leftHandPosContainer, rightHandPosContainer;
+	//Joint leftWristPosContainer, rightWristPosContainer;
+	FVector leftHandPosContainer, rightHandPosContainer;
+		
 	
 
 private:
@@ -97,6 +98,7 @@ private:
 	bool bRunning;
 	static FKinectPluginCore* Instance;
 };
+
 
 
 //NOTE (MR) : Still need to get these Joints

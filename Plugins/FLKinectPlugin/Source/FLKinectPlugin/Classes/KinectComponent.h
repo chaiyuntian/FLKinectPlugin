@@ -36,13 +36,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
 		FVector GetRightHandPosition();
 	
-	//Get Left Wrist Position
-	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
-		FVector GetLeftWristPosition();
-	//Get Right Wrist Position
-	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
-		FVector GetRightWristPosition();
-
 	//Get a bool that represents if the Left Hand is Closed
 	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
 		bool GetIsLeftHandClosed();
@@ -51,7 +44,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
 		bool GetIsRightHandClosed();
 	
-	
+	/* NOTE (MR) : Removed this until position data is working
+	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
+		FVector GetLeftWristPosition();
+	Get Right Wrist Position
+	UFUNCTION(BlueprintCallable, Category = "FL Kinect Functions")
+		FVector GetRightWristPosition();
+		*/
 
 private:
 	FKinectPluginCore* kinectInstance;

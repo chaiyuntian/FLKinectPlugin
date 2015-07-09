@@ -47,22 +47,13 @@ void UKinectComponent::KinectDebug(){
 FVector UKinectComponent::GetLeftHandPosition(){
 
 	return kinectInstance->LeftHandLastPosition;
+
 }
 
 FVector UKinectComponent::GetRightHandPosition(){
 
 	return kinectInstance->RightHandLastPosition;
 	
-}
-
-FVector UKinectComponent::GetLeftWristPosition(){
-
-	return kinectInstance->LeftWristLastPosition;
-}
-
-FVector UKinectComponent::GetRightWristPosition(){
-
-	return kinectInstance->RightWristLastPosition;
 }
 
 bool UKinectComponent::GetIsLeftHandClosed(){
@@ -74,4 +65,16 @@ bool UKinectComponent::GetIsRightHandClosed(){
 
 	return kinectInstance->RightHandLastIsClosed;
 }
+
+
+/* Note (MR) : Removed this for the moment
+FVector UKinectComponent::GetLeftWristPosition(){
+
+	return kinectInstance->LeftWristLastPosition;
+}
+
+FVector UKinectComponent::GetRightWristPosition(){
+
+	return kinectInstance->RightWristLastPosition;
+}*/
 

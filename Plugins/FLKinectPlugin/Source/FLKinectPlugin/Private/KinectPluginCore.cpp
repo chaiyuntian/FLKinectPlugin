@@ -227,8 +227,10 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 				TrackingState joint0State = joints[JointType_HandLeft].TrackingState;
 				TrackingState joint1State = joints[JointType_HandRight].TrackingState;
 
+				//NOTE (MR) : Something in here is letting Unreal build correctly
+
 				// If we can't find either of these joints, exit
-				if ((joint0State == TrackingState_NotTracked) || (joint1State == TrackingState_NotTracked))
+				/*if ((joint0State == TrackingState_NotTracked) || (joint1State == TrackingState_NotTracked))
 				{
 					return;
 				}
@@ -252,10 +254,10 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 				{
 					//Set Left / Right Hand Pos
 					SetLeftHandPos(joints[JointType_HandLeft]);
-					SetRightHandPos(joints[JointType_HandRight]);;
+					SetRightHandPos(joints[JointType_HandRight]);
 
 				}
-
+				*/
 
 		
 				//Set Left / Right Wrist Pos
@@ -292,12 +294,14 @@ FKinectPluginCore* FKinectPluginCore::GetInstance()
 					LeftHandLastPosition = lh;
 					RightHandLastPosition = rh;
 
-					UE_LOG(LogTemp, Warning, TEXT("%f Checking RightHandLastPosition"), rightHandPosContainer.X);
+					//Note (MR) : Can't print this out because something is incorrect but visual studio isn't telling me what
+
+					UE_LOG(LogTemp, Warning, TEXT("%f Check here to make sure changes carried over to Unreal "));
 			
 			}
 		}
 		
-	}
+	}     
 
 	void FKinectPluginCore::SetIsLeftHandClosed(int gestureIndex) {
 

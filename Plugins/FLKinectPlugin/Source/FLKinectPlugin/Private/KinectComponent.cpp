@@ -45,25 +45,31 @@ void UKinectComponent::KinectDebug(){
 }
 
 FVector UKinectComponent::GetLeftHandPosition(){
-
+	//NOTE (MR) : 7.10.15
+	//Currently note in use
 	return kinectInstance->LeftHandLastPosition;
-
+	
 }
 
 FVector UKinectComponent::GetRightHandPosition(){
-
+	//NOTE (MR) : 7.10.15
+	//Currently note in use
 	return kinectInstance->RightHandLastPosition;
 	
 }
 
 bool UKinectComponent::GetIsLeftHandClosed(){
-
+	//NOTE (MR) : 7.10.15
+	//Currently note in use
 	return kinectInstance->LeftHandLastIsClosed;
+	
 }
 
 bool UKinectComponent::GetIsRightHandClosed(){
-
+	//NOTE (MR) : 7.10.15
+	//Currently note in use
 	return kinectInstance->RightHandLastIsClosed;
+
 }
 
 

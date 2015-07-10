@@ -21,7 +21,6 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
-
 	void Debug(FString Msg);
 
 	//Method that says if our plugin is working
